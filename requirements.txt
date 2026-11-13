@@ -1,0 +1,13 @@
+# Core. Use Python 3.11-3.13 (3.12 recommended): Python 3.14 may not have ready-made pandas/numpy
+# packages yet, and pip then tries to compile them (needs Visual Studio on Windows).
+gradio>=4.44,<6
+pandas>=2.1
+numpy>=1.26
+scikit-learn>=1.4
+matplotlib>=3.8
+pydantic>=2.5
+requests>=2.31
+# Dev / tests
+pytest>=8
+# Optional: dense embeddings for RAG (set REWA_EMBEDDING_BACKEND=sbert)
+# sentence-transformers>=2.7
