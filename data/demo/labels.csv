@@ -1,0 +1,13 @@
+host,scenario,is_ransomware,first_malicious_ts,encryption_start_ts,user,variant
+WS-FIN-008,benign_backup_rotation,0,,,sam.smith,gray=cloud_sync_conflict
+WS-LEGAL-166,rw_full_chain,1,2026-10-05T16:32:00+00:00,2026-10-05T17:12:03+00:00,morgan.tremblay,
+WS-IT-026,rw_slow_encryptor,1,2026-10-05T17:35:00+00:00,2026-10-05T17:54:01+00:00,harper.singh,
+WS-ENG-169,benign_photo_rename,0,,,jordan.nguyen,
+WS-HR-060,benign_compression,0,,,casey.martin,
+WS-ENG-056,benign_office,0,,,sam.lee,
+WS-OPS-177,benign_dev_build,0,,,sam.garcia,
+WS-ENG-112,rw_inplace_no_rename,1,2026-10-05T19:07:00+00:00,2026-10-05T19:25:37+00:00,sam.patel,
+WS-LAB-028,rw_precursor_only,1,2026-10-05T20:41:00+00:00,,avery.patel,
+WS-ENG-076,rw_full_chain,1,2026-10-05T20:41:00+00:00,2026-10-05T21:14:52+00:00,jordan.brown,
+WS-LAB-243,rw_fast_encryptor,1,2026-10-05T23:49:00+00:00,2026-10-05T23:50:56+00:00,morgan.khan,
+WS-LAB-232,benign_it_patching,0,,,devon.garcia,
