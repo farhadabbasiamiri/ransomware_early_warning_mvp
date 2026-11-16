@@ -1,0 +1,507 @@
+{
+  "host": "WS-LAB-028",
+  "generated_at": "2026-11-07 01:13:53 UTC",
+  "mode": "offline",
+  "model": "none (deterministic planner)",
+  "decision": "ALERT_ESCALATE",
+  "risk_score": 92.3,
+  "risk_level": "CRITICAL",
+  "ml_probability": 0.986,
+  "model_disagreement": false,
+  "first_alert_utc": "2026-10-05 21:02:08 UTC",
+  "executive_summary": "WS-LAB-028 scored 92.3/100 (CRITICAL): likely active ransomware intrusion. Strongest signals: shadow copy / backup deletion, boot recovery inhibition, security / backup service tampering (MITRE T1490, T1489, T1562.001, T1059.001, T1027). All containment steps below await human approval.",
+  "incident_narrative": "20:41:40 UTC - Suspicious execution chain & discovery: Office app spawned a shell: powerpnt.exe \u2192 powershell.exe | 21:01:38 UTC - Suspicious privilege escalation: SeLoadDriverPrivilege used by winhlp41.exe (user avery.patel) | 21:10:33 UTC - Security / backup service tampering: Stop/disable commands against 5 security/backup/database service(s): MSExchangeIS, MSSQLSERVER, SQLWriter, Sense, WinDefend | 21:12:46 UTC - Shadow copy / backup deletion: `wmic.exe shadowcopy delete /nointeractive` (parent winhlp41.exe) | 21:13:06 UTC - Boot recovery inhibition: `bcdedit.exe /set {default} recoveryenabled no`",
+  "key_evidence": [
+    {
+      "indicator_id": "I4",
+      "statement": "Shadow copy / backup deletion (severity 1.0): `wmic.exe shadowcopy delete /nointeractive` (parent winhlp41.exe); `wbadmin.exe delete catalog -quiet` (parent winhlp41.exe)",
+      "citation": null
+    },
+    {
+      "indicator_id": "I5",
+      "statement": "Boot recovery inhibition (severity 1.0): `bcdedit.exe /set {default} recoveryenabled no`; `bcdedit.exe /set {default} bootstatuspolicy ignoreallfailures`",
+      "citation": null
+    },
+    {
+      "indicator_id": "I6",
+      "statement": "Security / backup service tampering (severity 1.0): Stop/disable commands against 5 security/backup/database service(s): MSExchangeIS, MSSQLSERVER, SQLWriter, Sense, WinDefend",
+      "citation": null
+    },
+    {
+      "indicator_id": "I8",
+      "statement": "Suspicious execution chain & discovery (severity 1.0): Office app spawned a shell: powerpnt.exe \u2192 powershell.exe; Encoded PowerShell command line (1x)",
+      "citation": null
+    },
+    {
+      "indicator_id": "I7",
+      "statement": "Suspicious privilege escalation (severity 0.7): SeLoadDriverPrivilege used by winhlp41.exe (user avery.patel); 1 process(es) from a user-writable path running at High/System integrity",
+      "citation": null
+    }
+  ],
+  "mitre_techniques": [
+    {
+      "id": "T1490",
+      "name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "triggered_by": [
+        "I4",
+        "I5"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1490/"
+    },
+    {
+      "id": "T1489",
+      "name": "Service Stop",
+      "tactic": "Impact",
+      "triggered_by": [
+        "I6"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1489/"
+    },
+    {
+      "id": "T1562.001",
+      "name": "Impair Defenses: Disable or Modify Tools",
+      "tactic": "Defense Evasion",
+      "triggered_by": [
+        "I6"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1562/001/"
+    },
+    {
+      "id": "T1059.001",
+      "name": "Command and Scripting Interpreter: PowerShell",
+      "tactic": "Execution",
+      "triggered_by": [
+        "I8"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1059/001/"
+    },
+    {
+      "id": "T1027",
+      "name": "Obfuscated Files or Information",
+      "tactic": "Defense Evasion",
+      "triggered_by": [
+        "I8"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1027/"
+    },
+    {
+      "id": "T1204.002",
+      "name": "User Execution: Malicious File",
+      "tactic": "Execution",
+      "triggered_by": [
+        "I8"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1204/002/"
+    },
+    {
+      "id": "T1083",
+      "name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "triggered_by": [
+        "I8"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1083/"
+    },
+    {
+      "id": "T1135",
+      "name": "Network Share Discovery",
+      "tactic": "Discovery",
+      "triggered_by": [
+        "I8"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1135/"
+    },
+    {
+      "id": "T1482",
+      "name": "Domain Trust Discovery",
+      "tactic": "Discovery",
+      "triggered_by": [
+        "I8"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1482/"
+    },
+    {
+      "id": "T1134",
+      "name": "Access Token Manipulation",
+      "tactic": "Privilege Escalation",
+      "triggered_by": [
+        "I7"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1134/"
+    },
+    {
+      "id": "T1068",
+      "name": "Exploitation for Privilege Escalation",
+      "tactic": "Privilege Escalation",
+      "triggered_by": [
+        "I7"
+      ],
+      "url": "https://attack.mitre.org/techniques/T1068/"
+    }
+  ],
+  "recommended_actions": [
+    {
+      "action_id": "A01",
+      "title": "Network-isolate the host via EDR containment",
+      "description": "Use the EDR console to contain the host (keeps EDR channel). Affects the user; approval required.",
+      "sensitive": true,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB02-1"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A07",
+      "title": "Preserve evidence: memory image, EDR telemetry and Windows logs",
+      "description": "Collect before any clean-up; record chain of custody.",
+      "sensitive": false,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB07-1",
+        "KB07-2"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A09",
+      "title": "Hunt for the same process / command / account on other hosts",
+      "description": "Scope the incident; ransomware usually stages on several hosts.",
+      "sensitive": false,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB01-2"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A02",
+      "title": "Disable / force credential reset for the user account and revoke sessions",
+      "description": "Coordinate with identity team; confirm it is not a service account.",
+      "sensitive": true,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB02-1"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A03",
+      "title": "Block the suspicious process hash/path and its C2 destinations",
+      "description": "Add EDR/app-control block and firewall/proxy block for observed destinations.",
+      "sensitive": true,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB02-1",
+        "KB06-3"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A04",
+      "title": "Verify offline/immutable backups for host and reachable shares",
+      "description": "Confirm last good restore point exists and is isolated from the network.",
+      "sensitive": false,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB03-4",
+        "KB03-3"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A05",
+      "title": "Pause backup retention/deletion jobs that could overwrite good restore points",
+      "description": "Temporary change to backup schedules; approval from backup owner.",
+      "sensitive": true,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB03-4",
+        "KB03-3"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A06",
+      "title": "Restore and re-enable security agent / stopped backup services from management console",
+      "description": "Re-enable tamper protection; confirm no approved change ticket explains the stop.",
+      "sensitive": true,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB04-1",
+        "KB04-3"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A10",
+      "title": "Escalate to incident response lead and start reporting workflow",
+      "description": "Notify IR lead; follow internal, legal and Cyber Centre/CISA reporting guidance. Do not pay or contact the attacker.",
+      "sensitive": true,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB01-2",
+        "KB08-2"
+      ],
+      "status": "PENDING_APPROVAL"
+    },
+    {
+      "action_id": "A08",
+      "title": "Decode and review encoded PowerShell in an isolated sandbox (do not execute)",
+      "description": "Static decoding only; identify download URLs and dropped files.",
+      "sensitive": false,
+      "requires_approval": true,
+      "rationale": "Recommended by playbook for observed indicators (I4, I5, I6, I8).",
+      "playbook_citations": [
+        "KB06-3",
+        "KB06-2"
+      ],
+      "status": "PENDING_APPROVAL"
+    }
+  ],
+  "citations": [
+    {
+      "chunk_id": "KB03-4",
+      "title": "Responding to shadow copy and backup deletion (Inhibit System Recovery)",
+      "section": "Preventive controls",
+      "sources": "MITRE ATT&CK T1490 https://attack.mitre.org/techniques/T1490/ ; CISA #StopRansomware Guide Part 1 (backups) https://www.cisa.gov/stopransomware/ransomware-guide ; CCCS ITSAP.40.002 Tips for backing up your information",
+      "score": 0.3883
+    },
+    {
+      "chunk_id": "KB03-3",
+      "title": "Responding to shadow copy and backup deletion (Inhibit System Recovery)",
+      "section": "Distinguishing benign activity",
+      "sources": "MITRE ATT&CK T1490 https://attack.mitre.org/techniques/T1490/ ; CISA #StopRansomware Guide Part 1 (backups) https://www.cisa.gov/stopransomware/ransomware-guide ; CCCS ITSAP.40.002 Tips for backing up your information",
+      "score": 0.3185
+    },
+    {
+      "chunk_id": "KB03-1",
+      "title": "Responding to shadow copy and backup deletion (Inhibit System Recovery)",
+      "section": "Why it matters",
+      "sources": "MITRE ATT&CK T1490 https://attack.mitre.org/techniques/T1490/ ; CISA #StopRansomware Guide Part 1 (backups) https://www.cisa.gov/stopransomware/ransomware-guide ; CCCS ITSAP.40.002 Tips for backing up your information",
+      "score": 0.2098
+    },
+    {
+      "chunk_id": "KB08-2",
+      "title": "Reporting, recovery and communication",
+      "section": "Recovery",
+      "sources": "Canadian Centre for Cyber Security Ransomware Playbook ITSM.00.099 https://www.cyber.gc.ca/en/guidance/ransomware-playbook-itsm00099 ; CISA #StopRansomware Guide https://www.cisa.gov/stopransomware/ransomware-guide",
+      "score": 0.094
+    },
+    {
+      "chunk_id": "KB04-1",
+      "title": "Security tool and service tampering (Service Stop, Impair Defenses)",
+      "section": "What the behaviour looks like",
+      "sources": "MITRE ATT&CK T1489 https://attack.mitre.org/techniques/T1489/ ; MITRE ATT&CK T1562.001 https://attack.mitre.org/techniques/T1562/001/",
+      "score": 0.2746
+    },
+    {
+      "chunk_id": "KB04-3",
+      "title": "Security tool and service tampering (Service Stop, Impair Defenses)",
+      "section": "Benign look-alikes",
+      "sources": "MITRE ATT&CK T1489 https://attack.mitre.org/techniques/T1489/ ; MITRE ATT&CK T1562.001 https://attack.mitre.org/techniques/T1562/001/",
+      "score": 0.1433
+    },
+    {
+      "chunk_id": "KB06-3",
+      "title": "Suspicious execution chain - Office spawning PowerShell, encoded commands, discovery",
+      "section": "Benign look-alikes",
+      "sources": "MITRE ATT&CK T1059.001, T1027, T1204.002, T1083, T1135, T1482 https://attack.mitre.org/ ; CCCS Ransomware Playbook ITSM.00.099 https://www.cyber.gc.ca/en/guidance/ransomware-playbook-itsm00099",
+      "score": 0.2567
+    },
+    {
+      "chunk_id": "KB06-2",
+      "title": "Suspicious execution chain - Office spawning PowerShell, encoded commands, discovery",
+      "section": "Response guidance",
+      "sources": "MITRE ATT&CK T1059.001, T1027, T1204.002, T1083, T1135, T1482 https://attack.mitre.org/ ; CCCS Ransomware Playbook ITSM.00.099 https://www.cyber.gc.ca/en/guidance/ransomware-playbook-itsm00099",
+      "score": 0.23
+    },
+    {
+      "chunk_id": "KB02-1",
+      "title": "Isolation and containment of an endpoint showing ransomware behaviour",
+      "section": "Isolate affected systems quickly",
+      "sources": "CISA #StopRansomware Guide Part 2 (May 2023) https://www.cisa.gov/stopransomware/ransomware-guide ; Canadian Centre for Cyber Security Ransomware Playbook ITSM.00.099 https://www.cyber.gc.ca/en/guidance/ransomware-playbook-itsm00099",
+      "score": 0.2301
+    },
+    {
+      "chunk_id": "KB03-2",
+      "title": "Responding to shadow copy and backup deletion (Inhibit System Recovery)",
+      "section": "Immediate actions",
+      "sources": "MITRE ATT&CK T1490 https://attack.mitre.org/techniques/T1490/ ; CISA #StopRansomware Guide Part 1 (backups) https://www.cisa.gov/stopransomware/ransomware-guide ; CCCS ITSAP.40.002 Tips for backing up your information",
+      "score": 0.1154
+    },
+    {
+      "chunk_id": "KB07-1",
+      "title": "Evidence preservation during ransomware response",
+      "section": "Collect before you clean",
+      "sources": "CISA #StopRansomware Guide Part 2 (May 2023) https://www.cisa.gov/stopransomware/ransomware-guide ; NIST SP 800-61r3 https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "score": 0.3238
+    },
+    {
+      "chunk_id": "KB07-2",
+      "title": "Evidence preservation during ransomware response",
+      "section": "Chain of custody",
+      "sources": "CISA #StopRansomware Guide Part 2 (May 2023) https://www.cisa.gov/stopransomware/ransomware-guide ; NIST SP 800-61r3 https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "score": 0.1926
+    },
+    {
+      "chunk_id": "KB01-2",
+      "title": "Initial triage and scoping of a suspected ransomware host",
+      "section": "Determine scope",
+      "sources": "CISA #StopRansomware Guide Part 2 (May 2023) https://www.cisa.gov/stopransomware/ransomware-guide ; NIST SP 800-61r3 https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "score": 0.3033
+    },
+    {
+      "chunk_id": "KB09-3",
+      "title": "False positive triage for ransomware early-warning alerts",
+      "section": "Tuning",
+      "sources": "Project analyst guidance derived from MITRE ATT&CK detection notes https://attack.mitre.org/ and vendor-neutral SOC practice",
+      "score": 0.0727
+    }
+  ],
+  "uncertainty": "Detection is based on synthetic-trained thresholds and endpoint telemetry only; network and identity context were not analysed.",
+  "false_positive_considerations": "Possible benign explanations: backup software rotating shadow copies; approved maintenance stopping services; management agents or power-user scripts using encoded PowerShell.",
+  "safety": {
+    "automated_actions_executed": 0,
+    "approval_required": true,
+    "execute_containment_enabled": false,
+    "telemetry_treated_as_untrusted": true,
+    "guardrail_notes": []
+  },
+  "agent_trace": [
+    {
+      "tool": "score_host_behavior",
+      "args": {
+        "host": "WS-LAB-028"
+      },
+      "status": "ok",
+      "step": 1,
+      "by": "planner",
+      "duration_ms": 0.3,
+      "output_preview": "risk 92.3 CRITICAL; active ['I4', 'I5', 'I6', 'I8', 'I7']"
+    },
+    {
+      "tool": "get_host_timeline",
+      "args": {
+        "host": "WS-LAB-028",
+        "max_events": 25
+      },
+      "status": "ok",
+      "step": 2,
+      "by": "planner",
+      "duration_ms": 11.6,
+      "output_preview": "596 events, 17 suspicious"
+    },
+    {
+      "tool": "map_to_mitre",
+      "args": {
+        "indicator_ids": [
+          "I4",
+          "I5",
+          "I6",
+          "I8",
+          "I7"
+        ]
+      },
+      "status": "ok",
+      "step": 3,
+      "by": "planner",
+      "duration_ms": 0.3,
+      "output_preview": "T1490, T1489, T1562.001, T1059.001, T1027, T1204.002, T1083, T1135, T1482, T1134, T1068"
+    },
+    {
+      "tool": "search_playbooks",
+      "args": {
+        "query": "shadow copy deletion vssadmin wbadmin backup deletion inhibit system recovery",
+        "k": 2
+      },
+      "status": "ok",
+      "step": 4,
+      "by": "planner",
+      "duration_ms": 9.5,
+      "output_preview": "KB03-4(0.3883), KB03-3(0.3185)"
+    },
+    {
+      "tool": "search_playbooks",
+      "args": {
+        "query": "bcdedit recoveryenabled no boot recovery inhibition backups",
+        "k": 2
+      },
+      "status": "ok",
+      "step": 4,
+      "by": "planner",
+      "duration_ms": 0.7,
+      "output_preview": "KB03-1(0.2098), KB08-2(0.094)"
+    },
+    {
+      "tool": "search_playbooks",
+      "args": {
+        "query": "security service stopped antivirus EDR backup agent tampering net stop",
+        "k": 2
+      },
+      "status": "ok",
+      "step": 4,
+      "by": "planner",
+      "duration_ms": 0.6,
+      "output_preview": "KB04-1(0.2746), KB04-3(0.1433)"
+    },
+    {
+      "tool": "search_playbooks",
+      "args": {
+        "query": "office spawned powershell encoded command discovery phishing initial execution",
+        "k": 2
+      },
+      "status": "ok",
+      "step": 4,
+      "by": "planner",
+      "duration_ms": 0.7,
+      "output_preview": "KB06-3(0.2567), KB06-2(0.23)"
+    },
+    {
+      "tool": "search_playbooks",
+      "args": {
+        "query": "Network-isolate the host via EDR containment. Use the EDR console to contain the host (keeps EDR channel). Affects the user; approval required.",
+        "k": 2
+      },
+      "status": "ok",
+      "step": "cite",
+      "by": "citation-check",
+      "duration_ms": 0.7,
+      "output_preview": "KB02-1(0.2301), KB03-2(0.1154)"
+    },
+    {
+      "tool": "search_playbooks",
+      "args": {
+        "query": "Preserve evidence: memory image, EDR telemetry and Windows logs. Collect before any clean-up; record chain of custody.",
+        "k": 2
+      },
+      "status": "ok",
+      "step": "cite",
+      "by": "citation-check",
+      "duration_ms": 0.6,
+      "output_preview": "KB07-1(0.3238), KB07-2(0.1926)"
+    },
+    {
+      "tool": "search_playbooks",
+      "args": {
+        "query": "Hunt for the same process / command / account on other hosts. Scope the incident; ransomware usually stages on several hosts.",
+        "k": 2
+      },
+      "status": "ok",
+      "step": "cite",
+      "by": "citation-check",
+      "duration_ms": 0.6,
+      "output_preview": "KB01-2(0.3033), KB09-3(0.0727)"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+host,rule_score,risk_level,ml_prob,first_alert,active,scenario,is_ransomware,first_malicious_ts,encryption_start_ts,user,variant
+WS-ENG-096,36.27,MEDIUM,0.07658676260543831,,"I8,I7",benign_office,0,,,casey.khan,gray=installer_from_temp+user_encoded_ps;density=0.87
+WS-ENG-148,97.49,CRITICAL,0.9966666666666667,2026-10-05 14:40:29 UTC,"I3,I1,I4,I2,I8",rw_fast_encryptor,1,2026-10-05T14:40:00+00:00,2026-10-05T14:40:53+00:00,alex.garcia,density=1.03
+WS-ENG-249,72.42,CRITICAL,0.512046525745667,2026-10-05 16:03:36 UTC,"I2,I8,I1",rw_slow_encryptor,1,2026-10-05T15:52:00+00:00,2026-10-05T16:01:30+00:00,taylor.brown,per_min=1.86;notes=False;precursors=False;delete_backups=True;stealth_exec=False;density=1.11
+WS-FIN-001,0.0,LOW,0.0006199691581197965,,,benign_dev_build,0,,,harper.martin,density=1.49
+WS-FIN-013,3.5,LOW,0.0006199691581197965,,I8,benign_mgmt_agent_ps,0,,,sam.roy,density=1.38
+WS-FIN-107,75.62,CRITICAL,0.6604853801169591,2026-10-05 14:46:58 UTC,"I2,I8,I7",rw_inplace_no_rename,1,2026-10-05T14:34:00+00:00,2026-10-05T14:53:06+00:00,quinn.smith,notes=False;delete_backups=False;density=1.24
+WS-FIN-199,99.51,CRITICAL,1.0,2026-10-05 17:09:44 UTC,"I3,I1,I4,I2,I5,I6,I8,I7",rw_full_chain,1,2026-10-05T16:41:00+00:00,2026-10-05T17:20:59+00:00,alex.singh,density=1.43
+WS-FIN-204,59.65,HIGH,0.059800194931773874,2026-10-05 22:14:00 UTC,"I6,I8,I4,I7",benign_backup_rotation,0,,,riley.smith,gray=helpdesk_recon+installer_from_temp+dba_maintenance;density=1.38
+WS-FIN-206,68.31,HIGH,0.4965250626566417,2026-10-05 17:43:32 UTC,"I6,I8,I7",rw_precursor_only,1,2026-10-05T17:26:00+00:00,,sam.patel,delete_backups=False;density=1.13
+WS-FIN-217,94.1,CRITICAL,0.9771798245614036,2026-10-05 15:59:36 UTC,"I4,I2,I5,I8,I7",rw_inplace_no_rename,1,2026-10-05T15:50:00+00:00,2026-10-05T16:06:03+00:00,jordan.garcia,notes=False;delete_backups=True;density=1.28
+WS-HR-008,3.5,LOW,0.0006199691581197965,,I8,benign_mgmt_agent_ps,0,,,devon.patel,density=1.35
+WS-HR-021,97.49,CRITICAL,0.9983333333333333,2026-10-05 14:24:28 UTC,"I3,I1,I4,I2,I8",rw_fast_encryptor,1,2026-10-05T14:24:00+00:00,2026-10-05T14:24:36+00:00,morgan.khan,density=0.69
+WS-HR-023,18.0,LOW,0.0006199691581197965,,I4,benign_backup_rotation,0,,,avery.roy,density=1.0
+WS-HR-033,0.0,LOW,0.0006199691581197965,,,benign_office,0,,,jamie.brown,density=0.68
+WS-HR-061,0.0,LOW,0.0006199691581197965,,,benign_it_patching,0,,,taylor.tremblay,density=0.63
+WS-HR-072,93.03,CRITICAL,0.9888583959899748,2026-10-05 16:35:58 UTC,"I4,I5,I6,I8,I7",rw_precursor_only,1,2026-10-05T16:12:00+00:00,,sam.martin,delete_backups=True;density=0.73
+WS-HR-108,0.0,LOW,0.0006199691581197965,,,benign_compression,0,,,jordan.tremblay,density=1.76
+WS-HR-178,0.0,LOW,0.0006199691581197965,,,benign_office,0,,,alex.lee,density=0.62
+WS-HR-202,58.51,HIGH,0.15767225673981913,2026-10-05 20:40:16 UTC,"I2,I1,I6",rw_slow_encryptor,1,2026-10-05T20:15:00+00:00,2026-10-05T20:31:46+00:00,harper.patel,per_min=1.14;notes=False;precursors=True;delete_backups=False;stealth_exec=True;density=0.62
+WS-HR-206,73.19,CRITICAL,0.6468464912280703,2026-10-05 20:48:46 UTC,"I2,I8,I7",rw_inplace_no_rename,1,2026-10-05T20:40:00+00:00,2026-10-05T20:51:46+00:00,devon.tremblay,notes=False;delete_backups=False;density=1.52
+WS-HR-218,39.45,MEDIUM,0.028142318160993877,,"I4,I7,I8",benign_backup_rotation,0,,,morgan.garcia,gray=installer_from_temp;density=1.2
+WS-IT-058,22.81,LOW,0.006158798309852174,,"I2,I8",benign_it_patching,0,,,alex.singh,gray=encrypted_container+helpdesk_recon;density=1.52
+WS-IT-090,52.75,HIGH,0.16433892340648582,2026-10-05 19:52:00 UTC,"I2,I1",rw_slow_encryptor,1,2026-10-05T19:37:00+00:00,2026-10-05T19:43:30+00:00,taylor.garcia,per_min=1.24;notes=False;precursors=False;delete_backups=True;stealth_exec=True;density=1.76
+WS-IT-169,27.54,MEDIUM,0.005397746935897574,,"I8,I6",benign_mgmt_agent_ps,0,,,harper.garcia,gray=user_encoded_ps+dba_maintenance;density=1.4
+WS-IT-183,0.0,LOW,0.0006199691581197965,,,benign_office,0,,,harper.singh,density=1.04
+WS-IT-208,39.16,MEDIUM,0.07658676260543831,,"I8,I7",benign_mgmt_agent_ps,0,,,casey.roy,gray=installer_from_temp+user_encoded_ps;density=0.7
+WS-IT-224,26.16,MEDIUM,0.028142318160993877,,"I7,I8",benign_photo_rename,0,,,alex.brown,gray=installer_from_temp;density=0.63
+WS-LAB-042,39.7,MEDIUM,0.036086762605438326,,"I2,I7,I8",benign_photo_rename,0,,,devon.smith,gray=installer_from_temp+encrypted_container;density=0.61
+WS-LAB-098,26.16,MEDIUM,0.028142318160993877,,"I7,I8",benign_photo_rename,0,,,alex.chen,gray=installer_from_temp;density=1.67
+WS-LAB-146,52.42,HIGH,0.10507470473569545,2026-10-05 21:07:09 UTC,"I1,I8,I7",benign_it_patching,0,,,alex.chen,gray=installer_from_temp+helpdesk_recon+cloud_sync_conflict;density=0.79
+WS-LAB-178,10.5,LOW,0.010325464976518841,,I8,benign_dev_build,0,,,quinn.garcia,gray=helpdesk_recon;density=1.06
+WS-LAB-215,39.45,MEDIUM,0.028142318160993877,,"I4,I7,I8",benign_backup_rotation,0,,,casey.garcia,gray=installer_from_temp;density=0.68
+WS-LAB-220,98.62,CRITICAL,1.0,2026-10-05 22:43:38 UTC,"I3,I1,I4,I2,I5,I8",rw_fast_encryptor,1,2026-10-05T22:43:00+00:00,2026-10-05T22:44:09+00:00,riley.brown,density=1.04
+WS-LAB-226,10.5,LOW,0.010325464976518841,,I8,benign_office,0,,,morgan.martin,gray=helpdesk_recon;density=1.1
+WS-LEGAL-097,53.87,HIGH,0.05830571685380434,2026-10-05 21:38:00 UTC,"I6,I7,I1,I8",benign_photo_rename,0,,,casey.chen,gray=cloud_sync_conflict+installer_from_temp+dba_maintenance;density=1.74
+WS-LEGAL-110,0.0,LOW,0.0006199691581197965,,,benign_compression,0,,,avery.brown,density=1.59
+WS-LEGAL-115,92.39,CRITICAL,0.6120055900731525,2026-10-05 16:10:00 UTC,"I3,I2,I8,I1,I6",rw_slow_encryptor,1,2026-10-05T15:57:00+00:00,2026-10-05T16:15:00+00:00,avery.tremblay,per_min=1.63;notes=True;precursors=True;delete_backups=False;stealth_exec=False;density=1.16
+WS-LEGAL-121,97.49,CRITICAL,0.9983333333333333,2026-10-05 16:21:40 UTC,"I3,I1,I4,I2,I8",rw_fast_encryptor,1,2026-10-05T16:21:00+00:00,2026-10-05T16:22:06+00:00,riley.khan,density=1.15
+WS-LEGAL-175,94.1,CRITICAL,0.9771798245614036,2026-10-05 15:04:16 UTC,"I4,I2,I5,I8,I7",rw_inplace_no_rename,1,2026-10-05T14:54:00+00:00,2026-10-05T15:09:20+00:00,harper.nguyen,notes=False;delete_backups=True;density=1.75
+WS-LEGAL-180,41.43,MEDIUM,0.014647746935897574,,"I2,I8,I6",benign_mgmt_agent_ps,0,,,alex.brown,gray=encrypted_container+user_encoded_ps+dba_maintenance;density=1.41
+WS-LEGAL-185,99.51,CRITICAL,1.0,2026-10-05 15:10:47 UTC,"I3,I1,I4,I2,I5,I6,I8,I7",rw_full_chain,1,2026-10-05T14:44:00+00:00,2026-10-05T15:29:50+00:00,sam.lee,density=1.74
+WS-LEGAL-206,25.41,MEDIUM,0.01633892340648581,,"I1,I8",benign_compression,0,,,riley.smith,gray=cloud_sync_conflict+user_encoded_ps;density=1.64
+WS-OPS-029,0.0,LOW,0.0006199691581197965,,,benign_compression,0,,,devon.roy,density=1.67
+WS-OPS-051,0.0,LOW,0.0006199691581197965,,,benign_dev_build,0,,,jamie.brown,density=1.75
+WS-OPS-095,98.62,CRITICAL,0.9966666666666667,2026-10-05 14:14:26 UTC,"I3,I1,I4,I2,I5,I8",rw_fast_encryptor,1,2026-10-05T14:14:00+00:00,2026-10-05T14:15:00+00:00,alex.tremblay,density=0.79
+WS-OPS-108,26.16,MEDIUM,0.028142318160993877,,"I7,I8",benign_dev_build,0,,,casey.chen,gray=installer_from_temp;density=0.76
+WS-OPS-160,31.32,MEDIUM,0.0006199691581197965,,"I4,I2",benign_backup_rotation,0,,,harper.chen,gray=encrypted_container;density=1.53
+WS-OPS-191,68.31,HIGH,0.4995250626566416,2026-10-05 19:56:37 UTC,"I6,I8,I7",rw_precursor_only,1,2026-10-05T19:34:00+00:00,,jordan.martin,delete_backups=False;density=0.71
+WS-OPS-246,32.43,MEDIUM,0.007492131643185507,,"I6,I8",benign_photo_rename,0,,,jordan.patel,gray=helpdesk_recon+dba_maintenance;density=1.61
+WS-SALES-042,0.0,LOW,0.0006199691581197965,,,benign_dev_build,0,,,devon.roy,density=1.16
+WS-SALES-052,12.25,LOW,0.004286635824786463,,I8,benign_compression,0,,,morgan.garcia,gray=user_encoded_ps;density=1.13
+WS-SALES-057,10.5,LOW,0.010325464976518841,,I8,benign_office,0,,,morgan.chen,gray=helpdesk_recon;density=1.77
+WS-SALES-061,91.9,CRITICAL,0.978080618212197,2026-10-05 15:28:09 UTC,"I4,I5,I8,I7,I6",rw_precursor_only,1,2026-10-05T15:04:00+00:00,,harper.chen,delete_backups=True;density=0.85
+WS-SALES-070,89.28,CRITICAL,0.3141167011842636,2026-10-05 18:39:38 UTC,"I3,I2,I1,I6",rw_slow_encryptor,1,2026-10-05T18:21:00+00:00,2026-10-05T18:38:57+00:00,alex.lee,per_min=1.99;notes=True;precursors=True;delete_backups=False;stealth_exec=True;density=1.66
+WS-SALES-079,90.25,CRITICAL,0.9567353801169592,2026-10-05 19:37:41 UTC,"I4,I2,I8,I7",rw_inplace_no_rename,1,2026-10-05T19:28:00+00:00,2026-10-05T19:42:25+00:00,quinn.brown,notes=False;delete_backups=True;density=0.83
+WS-SALES-188,0.0,LOW,0.0006199691581197965,,,benign_it_patching,0,,,morgan.lee,density=1.32
+WS-SALES-221,99.46,CRITICAL,1.0,2026-10-05 22:26:11 UTC,"I3,I1,I4,I2,I5,I6,I8,I7",rw_full_chain,1,2026-10-05T22:00:00+00:00,2026-10-05T22:35:36+00:00,avery.tremblay,density=1.18
+WS-SALES-236,99.51,CRITICAL,1.0,2026-10-05 22:46:40 UTC,"I3,I1,I4,I2,I5,I6,I8,I7",rw_full_chain,1,2026-10-05T22:25:00+00:00,2026-10-05T23:05:18+00:00,casey.chen,density=0.6
+WS-SALES-246,99.43,CRITICAL,1.0,2026-10-05 20:25:11 UTC,"I3,I1,I4,I2,I5,I8,I7,I6",rw_full_chain,1,2026-10-05T20:06:00+00:00,2026-10-05T20:40:38+00:00,casey.tremblay,density=1.66
+WS-SALES-249,26.16,MEDIUM,0.028142318160993877,,"I7,I8",benign_it_patching,0,,,devon.lee,gray=installer_from_temp;density=1.73

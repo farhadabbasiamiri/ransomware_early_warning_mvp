@@ -1,0 +1,41 @@
+flowchart LR
+  subgraph DATA["1 · Data pipeline"]
+    G["Synthetic telemetry generator<br/>5 ransomware-like + 7 benign scenarios<br/>(no malware, inert event rows)"]
+    U["Upload CSV / JSON / JSONL<br/>(Splunk Attack Data / OTRF after mapping)"]
+    V["Schema validation &amp; normalisation<br/>rewa/schema.py"]
+    G --> V
+    U --> V
+  end
+  subgraph DETECT["2 · Detection"]
+    F["8 behavioural indicators<br/>I1 rename · I2 entropy · I3 notes · I4 backup del<br/>I5 bcdedit · I6 svc tamper · I7 privesc · I8 exec chain"]
+    R["Explainable noisy-OR risk score 0-100<br/>+ cumulative risk timeline"]
+    M["RandomForest second opinion<br/>(trained on train split)"]
+    V --> F --> R
+    F --> M
+  end
+  subgraph AGENT["3 · LLM agent (Ollama · Qwen2.5 / Llama 3.1)"]
+    A["Agent loop<br/>tool selection → evidence → JSON report"]
+    T1["score_host_behavior"]
+    T2["get_host_timeline<br/>(untrusted text redacted)"]
+    T3["map_to_mitre<br/>(local ATT&amp;CK map)"]
+    T4["search_playbooks<br/>RAG: TF-IDF / BGE"]
+    KB[("Playbook KB<br/>CISA · Cyber Centre<br/>NIST · MITRE")]
+    GR["Guardrails<br/>vetted action catalog · schema validation<br/>scores from tools only · offline fallback"]
+    A <--> T1 & T2 & T3 & T4
+    T4 --- KB
+    A --> GR
+  end
+  subgraph UI["4 · Gradio dashboard"]
+    D1["Fleet risk ranking"]
+    D2["Host investigation:<br/>timeline · evidence · MITRE · citations · agent trace"]
+    H["👤 Human approval<br/>analyst + justification"]
+    AU[("Audit log<br/>simulated tickets<br/>nothing executed")]
+    D1 --> D2 --> H --> AU
+  end
+  R --> D1
+  M --> D1
+  R --> T1
+  GR --> D2
+  MON["Monitoring: JSONL logs, latency, errors"]
+  A -.-> MON
+  H -.-> MON

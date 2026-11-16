@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+# Virtual environments (any name: .venv, .venv312, venv, ...)
+.venv*/
+venv*/
+env/
+# Local secrets
+.env
+# Generated at runtime (re-created by scripts/generate_data.py and on first app start)
+logs/*.jsonl
+data/generated/
+models/*.pkl
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
