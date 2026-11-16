@@ -1,0 +1,22 @@
+{
+  "train_hosts": 120,
+  "cv_f1_mean": 1.0,
+  "cv_f1_std": 0.0,
+  "feature_importance": {
+    "backup_del_strong": 0.2419,
+    "temp_exec": 0.2085,
+    "entropy_10min_max": 0.1073,
+    "office_to_shell": 0.1068,
+    "impact_corroborated": 0.0924,
+    "note_dirs": 0.0617,
+    "recovery_inhibit": 0.0505,
+    "encoded_ps": 0.0383,
+    "rename_10min_max": 0.0287,
+    "elevated_temp_exec": 0.0179,
+    "rename_peak_per_min": 0.0155,
+    "sec_services_stopped": 0.0119,
+    "sensitive_priv_events": 0.0117,
+    "discovery_cmds": 0.0069,
+    "backup_del_weak": 0.0001
+  }
+}
